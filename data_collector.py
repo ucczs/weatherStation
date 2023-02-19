@@ -26,4 +26,4 @@ class DataCollector():
 
                 for data_writer in self.data_writers:
                     data_writer.writeData(data_strings)
-                time.sleep(self.update_time_sec)
+            time.sleep(self.update_time_sec)
