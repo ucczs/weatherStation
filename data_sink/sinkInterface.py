@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class DataWriter(ABC):
+class DataSink(ABC):
     @abstractmethod
     def writeData(self, data: str) -> None:
         pass

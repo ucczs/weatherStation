@@ -1,8 +1,8 @@
-from data_writers.writerInterface import DataWriter
+from data_sink.sinkInterface import DataSink
 import time
 import datetime
 
-class CsvWriter(DataWriter):
+class CsvWriter(DataSink):
     def __init__(self, directory: str, maxWriteCount: int) -> None:
         self.directory = directory
         self.counter = 0

@@ -1,7 +1,7 @@
 import datetime
-from data_writers.writerInterface import DataWriter
+from data_sink.sinkInterface import DataSink
 
-class consoleWriter(DataWriter):
+class consoleWriter(DataSink):
     def __init__(self) -> None:
         pass
 

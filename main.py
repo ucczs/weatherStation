@@ -1,6 +1,6 @@
 from data_collector import DataCollector
-from data_writers.csv_writer import CsvWriter
-from sensors.sensor_dht11 import Sensor_DHT11
+from data_sink.csv_writer import CsvWriter
+from data_source.sensor_dht11 import Sensor_DHT11
 
 
 def startWeatherTracking():

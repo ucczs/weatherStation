@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Sensor(ABC):
+class DataSource(ABC):
     @abstractmethod
     def getTemperature(self):
         pass

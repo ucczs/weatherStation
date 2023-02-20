@@ -1,7 +1,7 @@
-from sensors.sensorInterface import Sensor
+from data_source.dataSourceInterface import DataSource
 from random import randint
 
-class Sensor_Dummy(Sensor):
+class Sensor_Dummy(DataSource):
     def __init__(self, temp_range: list[int], humidity_range: list[int], sensor_name: str) -> None:
         self.temp_range = temp_range
         self.humidity_range = humidity_range

@@ -1,8 +1,8 @@
 import Adafruit_DHT
 import time
-from sensorInterface import Sensor
+from dataSourceInterface import DataSource
 
-class Sensor_DHT11(Sensor):
+class Sensor_DHT11(DataSource):
     durability_ms = 2000
 
     def __init__(self, sensor_pin, sensor_name) -> None:
