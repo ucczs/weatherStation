@@ -1,6 +1,7 @@
 from data_collector import DataCollector
 from data_sink.csv_writer import CsvWriter
 from data_source.sensor_dht11 import Sensor_DHT11
+from data_source.weather_api_sensor import WeatherApi
 
 
 def startWeatherTracking():
@@ -12,7 +13,9 @@ def startWeatherTracking():
     sensor_pin = 4
     sensor = Sensor_DHT11(sensor_pin, "DHT11")
 
-    myDataCollector = DataCollector(csv_writer, sensor)
+    api_source = WeatherApi("", "api sensor", "Stuttgart")
+
+    myDataCollector = DataCollector([csv_writer], [api_source, sensor])
     myDataCollector.collectData()
 
 
