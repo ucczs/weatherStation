@@ -1,6 +1,6 @@
 import Adafruit_DHT
 import time
-from dataSourceInterface import DataSource
+from data_source.dataSourceInterface import DataSource
 
 class Sensor_DHT11(DataSource):
     durability_ms = 2000
