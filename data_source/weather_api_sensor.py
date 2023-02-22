@@ -38,12 +38,19 @@ class WeatherApi(DataSource):
 
     def _getDataViaApi(self) -> None:
         request = self._getApiRequestString()
-        response = requests.get(request)
-        if response.ok:
-            data = response.json()
-            self.latestTemperature = data["current"]["temp_c"]
-            self.latestHumidity = data["current"]["humidity"]
-            self.timestampLatestMeasurement = round(time.time()*1000)
-        else:
+
+        try:
+            response = requests.get(request)
+
+            if response.ok:
+                data = response.json()
+                self.latestTemperature = data["current"]["temp_c"]
+                self.latestHumidity = data["current"]["humidity"]
+                self.timestampLatestMeasurement = round(time.time()*1000)
+            else:
+                self.latestHumidity = -99
+                self.latestTemperature = -99
+
+        except:
             self.latestHumidity = -99
             self.latestTemperature = -99
