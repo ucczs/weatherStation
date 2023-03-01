@@ -1,6 +1,7 @@
 from data_collector import DataCollector
 from data_sink.csv_writer import CsvWriter
 from data_source.sensor_dht11 import Sensor_DHT11
+from data_source.sensor_dht20 import Sensor_DHT20
 from data_source.weather_api_sensor import WeatherApi
 
 
@@ -9,12 +10,11 @@ def startWeatherTracking():
     file_limit = 3000
     csv_writer = CsvWriter(output_dir, file_limit)
 
-
     sensor_pin = 4
     sensor_1 = Sensor_DHT11(sensor_pin, "DHT11")
 
-    sensor_pin = 5
-    sensor_2 = Sensor_DHT11(sensor_pin, "DHT11")
+    i2c_adress = 0x38
+    sensor_2 = Sensor_DHT20(i2c_adress, "DHT20")
 
     api_source = WeatherApi("", "api sensor", "Stuttgart")
 
