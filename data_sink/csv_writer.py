@@ -14,13 +14,16 @@ class CsvWriter(DataSink):
         filename = self.directory + 'data_' + timestr + '.csv'
         return filename
 
-    def writeData(self, data: list[str]) -> None:
+    def writeData(self, data: list[str], time: str = None) -> None:
         self.counter += 1
         if self.counter > self.maxWriteCount:
                 self.filename = self._getFilename()
                 self.counter = 0
         with open(self.filename,'a') as file:
-            currentTime = str(datetime.datetime.now())
+            if time is None:
+                currentTime = str(datetime.datetime.now())
+            else:
+                currentTime = time
             print_str = currentTime + ","
             for element in data:
                 print_str += element + ","

@@ -14,7 +14,8 @@ def dummySensorConsolePrint():
     sensor1 = WeatherApi("", "api sensor", "Stuttgart")
     sensor2 = Sensor_Dummy([-10, 30], [25, 75], "Dummy Sensor 2")
 
-    dataCollector = DataCollector([writer1, writer2], [sensor1, sensor2], 1)
+    time_sync = True
+    dataCollector = DataCollector([writer1, writer2], [sensor1, sensor2], 1, time_sync)
     dataCollector.collectData()
 
 def simpleSetup():
@@ -26,7 +27,8 @@ def simpleSetup():
 
     sensor2 = Sensor_Dummy([-10, 30], [25, 75], "Dummy Sensor 2")
 
-    dataCollector = DataCollector([writer1, writer2], [sensor2], 1)
+    time_sync = True
+    dataCollector = DataCollector([writer1, writer2], [sensor2], 1, time_sync)
     dataCollector.collectData()
 
 if __name__ == "__main__":
