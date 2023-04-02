@@ -1,0 +1,110 @@
+@startuml
+!define ABSTRACT &#123;abstract&#125;
+
+abstract class DataSource {
+    String sensor_name
+    String sensor_type
+    {abstract} void getSensorValue()
+    String getSensorName()
+    String getSensorType()
+}
+
+class DataProvider_dummy {
+}
+
+class Sensor_dummy {
+    float getValue()
+}
+
+class DataProvider_dht11 {
+}
+
+class Sensor_dht11 {
+    int durability_ms
+    int timestampLatestMeasurement
+    int latestSensorValue
+    int sensor_pin
+    int getTemperature()
+    int getHumidity()
+}
+
+class DataProvider_dht20 {
+}
+
+class Sensor_dht20 {
+    int durability_ms
+    int timestampLatestMeasurement
+    int latestSensorValue
+    bool _init_i2c()
+    tuple _readData()
+    float getTemperature()
+    float getHumidity()
+}
+
+class DataProvider_mhz19 {
+}
+
+class Sensor_mhz19 {
+    int durability_ms
+    int timestampLatestMeasurement
+    int latestSensorValue
+    float _readData()
+    float getCo2Value()
+}
+
+class DataProvider_api {
+}
+
+class Sensor_api {
+    int durability_ms
+    int timestampLatestMeasurement
+    int latestSensorValue
+    String city
+    String api_key
+    float _getApiRequestString()
+    float _getDataViaApi()
+    float getTemperature()
+    float getHumidity()
+}
+
+DataSource <|-- DataProvider_dummy 
+DataSource <|-- DataProvider_dht11 
+DataSource <|-- DataProvider_dht20 
+DataSource <|-- DataProvider_mhz19 
+DataSource <|-- DataProvider_api 
+
+DataProvider_dht11 "1..*" o-- "1" Sensor_dht11 
+DataProvider_dht20 "1..*" o-- "1" Sensor_dht20 
+DataProvider_mhz19 "1..*" o-- "1" Sensor_mhz19 
+DataProvider_api "1..*" o-- "1" Sensor_api 
+DataProvider_dummy "1..*" o-- "1" Sensor_dummy 
+
+
+abstract class DataSink {
+    {abstract} void writeData()
+}
+
+class ConsoleWriter {
+}
+
+class CsvWriter {
+    String directory
+    String filename
+    Int counter
+    Int maxWriteCount
+    String _getFilename()
+}
+
+DataSink <|-- ConsoleWriter
+DataSink <|-- CsvWriter
+
+class DataCollector {
+    Int update_time_sec
+    Bool time_sync
+    void collectData()
+}
+
+DataCollector "1" o-- "1..*" DataSink
+DataCollector "1" o-- "1..*" DataSource
+
+@enduml
