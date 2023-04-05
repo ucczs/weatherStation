@@ -4,7 +4,7 @@ from os import path
 from os import walk
 
 class csvReader(DataReader):
-    header = ["time", "sensor_id", "sensor_name", "temp", "humidity", "NaN"]
+    header = ["time", "sensor_id", "sensor_name", "sensor_type", "sensor_value", "NaN"]
 
     def __init__(self, data_path: str) -> None:
         self.data_path = data_path
