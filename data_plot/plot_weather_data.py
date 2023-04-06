@@ -31,7 +31,7 @@ for day in dayChangeList[1:]:
 plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
 plt.gca().axes.set_xlabel("Date (CET)")
 plt.gca().axes.set_ylabel("Temprature in °C")
-plt.gca().axes.set_ylim(-5,25)
+plt.gca().axes.set_ylim(0,25)
 
 
 ########################################################################
@@ -49,7 +49,7 @@ for day in dayChangeList[1:]:
 plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
 plt.gca().axes.set_xlabel("Date (CET)")
 plt.gca().axes.set_ylabel("Humidity in %")
-plt.gca().axes.set_ylim(-5,105)
+plt.gca().axes.set_ylim(10,100)
 
 ########################################################################
 
@@ -65,6 +65,6 @@ for day in dayChangeList[1:]:
 plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
 plt.gca().axes.set_xlabel("Date (CET)")
 plt.gca().axes.set_ylabel("Co2 Concentration in ppm")
-plt.gca().axes.set_ylim(0,1500)
+plt.gca().axes.set_ylim(300,2000)
 
 plt.show()
