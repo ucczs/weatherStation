@@ -1,8 +1,7 @@
-from data_source.dataSourceInterface import DataSource
 import requests
 import time
 
-class WeatherApi(DataSource):
+class WeatherApi():
     api_request = "http://api.weatherapi.com/v1/current.json?key={api}&q={city}&aqi=yes"
     durability_ms = 30000
 

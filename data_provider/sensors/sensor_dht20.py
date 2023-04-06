@@ -1,8 +1,7 @@
 import time
-from data_source.dataSourceInterface import DataSource
 import smbus2
 
-class Sensor_DHT20(DataSource):
+class Sensor_DHT20():
     durability_ms = 2000
 
     def __init__(self, i2c_adress, sensor_name) -> None:

@@ -1,12 +1,12 @@
 import time
 import datetime
-from data_source.dataSourceInterface import DataSource
+from data_provider.data_provider import DataProvider
 from data_sink.sinkInterface import DataSink
 
 class DataCollector():
-    def __init__(self, data_sink: list[DataSink], sensors: list[DataSource], update_time_sec: float, time_sync: bool) -> None:
+    def __init__(self, data_sink: list[DataSink], sensor_data_providers: list[DataProvider], update_time_sec: float, time_sync: bool) -> None:
         self.data_sink = data_sink
-        self.sensors = sensors
+        self.sensor_data_providers = sensor_data_providers
         self.update_time_sec = update_time_sec
         self.time_sync = time_sync
 
@@ -18,20 +18,17 @@ class DataCollector():
             else:
                 currentTime = None
 
-            for sensor_idx, sensor in enumerate(self.sensors):
-                temperature = sensor.getTemperature()
-                humidity = sensor.getHumidity()
-                if (temperature is None):
-                    temperature = -99
-                temp_str = "{:f}".format(temperature)
+            for sensor_idx, sensor_data_provider in enumerate(self.sensor_data_providers):
+                sensor_value = sensor_data_provider.getSensorValue()
+                if (sensor_value is None):
+                    sensor_value = -99
+                sensor_val_str = "{:f}".format(sensor_value)
 
-                if (humidity is None):
-                    humidity = -99
-                humidity_str = "{:f}".format(humidity)
-
-                sensor_name = sensor.getSensorName()
-                data_strings = [str(sensor_idx), sensor_name, temp_str, humidity_str]
+                sensor_name = sensor_data_provider.getSensorName()
+                sensor_type = sensor_data_provider.getSensorType()
+                data_strings = [str(sensor_idx), sensor_name, sensor_type, sensor_val_str]
 
                 for data_writer in self.data_sink:
                     data_writer.writeData(data_strings, time=currentTime)
+
             time.sleep(self.update_time_sec)
