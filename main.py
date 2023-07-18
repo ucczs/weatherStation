@@ -1,5 +1,6 @@
 from data_collector import DataCollector
 from data_sink.csv_writer import CsvWriter
+from data_sink.staticHtml_writer import staticHtmlWriter
 
 from data_provider.dht20_data_provider import DataProvider_dht20
 from data_provider.mhz19_data_provider import DataProvider_mhz19
@@ -17,6 +18,7 @@ def startWeatherTracking():
     file_limit = 10_000
     csv_writer = CsvWriter(output_dir, file_limit)
     console_writer = consoleWriter()
+    html_writer = staticHtmlWriter(file_dir="/home/pi/weatherScripts/html_info")
 
     i2c_adress = 0x38
     sensor_dht20 = Sensor_DHT20(i2c_adress, "DHT20")
@@ -39,7 +41,8 @@ def startWeatherTracking():
 
     data_sink_list = [
         csv_writer,
-        console_writer
+        console_writer,
+        html_writer
     ]
 
     time_sync = True
