@@ -10,7 +10,10 @@ class Sensor_MH_Z19():
         self.timestampLatestMeasurement = -1
 
     def _readData(self):
-        return mh_z19.read_co2valueonly()
+        sensor_data = mh_z19.read_co2valueonly()
+        if not isinstance(sensor_data, (int, float)):
+            sensor_data = None
+        return sensor_data
 
     def getSensorName(self) -> str:
         return self.sensor_name
