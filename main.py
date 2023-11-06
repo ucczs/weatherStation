@@ -1,6 +1,7 @@
 from data_collector import DataCollector
 from data_sink.csv_writer import CsvWriter
 from data_sink.staticHtml_writer import staticHtmlWriter
+from data_sink.mqtt_publisher import mqttPublisher
 
 from data_provider.dht20_data_provider import DataProvider_dht20
 from data_provider.mhz19_data_provider import DataProvider_mhz19
@@ -19,11 +20,12 @@ def startWeatherTracking():
     csv_writer = CsvWriter(output_dir, file_limit)
     console_writer = consoleWriter()
     html_writer = staticHtmlWriter(file_dir="/home/pi/weatherScripts/html_info")
+    mqtt_publisher = mqttPublisher('homeassistant.local', 1883, "sensor/temperature_out", "sensor/temperature_in", "sensor/humidity_in", "sensor/last_data_fetch", "sensor/co2_in", '', '')
 
     i2c_adress = 0x38
     sensor_dht20 = Sensor_DHT20(i2c_adress, "DHT20")
     sensor_mhz19 = Sensor_MH_Z19("MH-Z19")
-    api_source = WeatherApi("", "api sensor", "Stuttgart")
+    api_source = WeatherApi("", "api sensor", "")
 
     data_provider_dht20_temp = DataProvider_dht20("DHT20", "temperature", sensor_dht20)
     data_provider_dht20_humidity = DataProvider_dht20("DHT20", "humidity", sensor_dht20)
@@ -42,7 +44,8 @@ def startWeatherTracking():
     data_sink_list = [
         csv_writer,
         console_writer,
-        html_writer
+        html_writer,
+        mqtt_publisher
     ]
 
     time_sync = True
